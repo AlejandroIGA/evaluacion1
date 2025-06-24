@@ -9,9 +9,9 @@ public class CategoriaRequisito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "id_categoria", unique = true)
-    private Long categoriaId;
+    private int categoriaId;
     
 }
