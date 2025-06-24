@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.edut.uteq.evaluacion1.model.entity.Categoria;
 import mx.edut.uteq.evaluacion1.model.entity.CategoriaRequisito;
-import mx.edut.uteq.evaluacion1.model.entity.Requisito;
+import mx.edut.uteq.evaluacion1.model.entity.Tipo;
 import mx.edut.uteq.evaluacion1.model.repository.CategoriaRepo;
-import mx.edut.uteq.evaluacion1.model.repository.RequisitoRepo;
+import mx.edut.uteq.evaluacion1.model.repository.TipoRepo;
 
 @CrossOrigin("http://localhost:5173/")
 @RestController
@@ -31,7 +31,7 @@ public class CategoriaController {
     private CategoriaRepo repo;
 
     @Autowired
-    private RequisitoRepo requisitoRepo;
+    private TipoRepo tipoRepo;
 
     @GetMapping
     public List<Categoria> buscarTodos() {
@@ -45,31 +45,25 @@ public class CategoriaController {
         return ResponseEntity.ok(entity);
     }
 
-    // Insertar en la de categoria_requisito
-    @PostMapping("/agregar-requisito")
-    public ResponseEntity<?> agregarRequisitoACategoria(
-            @RequestParam int idCategoria,
-            @RequestParam int idRequisito) {
-
-        Optional<Categoria> categoriaOpt = repo.findById(idCategoria);
-        Optional<Requisito> requisitoOpt = requisitoRepo.findById(idRequisito);
-
-        if (categoriaOpt.isPresent() && requisitoOpt.isPresent()) {
-            Categoria categoria = categoriaOpt.get();
-
-            CategoriaRequisito cr = new CategoriaRequisito();
-            cr.setRequisitoId(idRequisito);
-            // No pongas categoriaId, JPA lo maneja con @JoinColumn y cascade
-
-            categoria.getCategoriasTipo().add(cr);
-
-            Categoria categoriaActualizada = repo.save(categoria);
-
-            return ResponseEntity.ok(categoriaActualizada);
+    @PostMapping("/categoria-tipo")
+    public ResponseEntity<?> agregarRequisitoACategoria(@RequestParam int idCategoria, @RequestParam int idTipo) {
+    Optional<Categoria> categoriaOpt = repo.findById(idCategoria);
+    Optional<Tipo> tipoOpt = tipoRepo.findById(idTipo);
+    
+        if (categoriaOpt.isEmpty() || tipoOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Categoría o tipo no encontrados");
         }
 
-        return ResponseEntity.badRequest().body("Categoría o requisito no encontrados");
-    }
+        Categoria entity = categoriaOpt.get();
+        Tipo entityT = tipoOpt.get();
+
+        CategoriaRequisito cr = new CategoriaRequisito();
+        cr.setCategoria(entity);  
+        cr.setTipo(entityT);            
+        entity.getCategoriasTipo().add(cr);  
+
+    return ResponseEntity.ok(repo.save(entity));
+}
 
     // Editar
     @PutMapping("/{id}")
