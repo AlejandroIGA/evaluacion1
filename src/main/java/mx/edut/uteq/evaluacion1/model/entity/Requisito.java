@@ -16,7 +16,6 @@ public class Requisito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int id_tipo;
     private String descripcion;
 
     @ManyToOne
