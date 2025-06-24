@@ -21,7 +21,7 @@ public class Tipo {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipo")
     private List<Requisito> requisitos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipo")
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_requisito")
     private List<CategoriaRequisito> categorias;
 }
