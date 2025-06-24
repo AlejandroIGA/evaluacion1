@@ -13,7 +13,5 @@ public class CategoriaRequisito {
 
     @Column(name = "id_categoria", unique = true)
     private int categoriaId;
-    @Column(name = "id_requisito", unique = true)
-    private int requisitoId;
     
 }
