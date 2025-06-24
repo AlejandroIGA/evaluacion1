@@ -51,8 +51,8 @@ public class RequisitoController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<?> create(@RequestBody Requisito requisito, @RequestParam int idTipo) {
-        Optional<Tipo> opt = tipoRepo.findById(idTipo);
+    public ResponseEntity<?> create(@RequestBody Requisito requisito, @PathVariable int id) {
+        Optional<Tipo> opt = tipoRepo.findById(id);
         if(opt.isPresent()){
             Tipo t = opt.get();
             requisito.setTipo(t);
@@ -62,8 +62,8 @@ public class RequisitoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> edit(@RequestBody Requisito requisito, @RequestParam int idRequisito) {
-        Optional<Requisito> opt = requisitoRepo.findById(idRequisito);
+    public ResponseEntity<?> edit(@PathVariable int id,@RequestBody Requisito requisito ) {
+        Optional<Requisito> opt = requisitoRepo.findById(id);
         if(opt.isPresent()){
             Requisito r = opt.get();
             Optional<Tipo> tipoOpt = tipoRepo.findById(r.getTipo().getId());

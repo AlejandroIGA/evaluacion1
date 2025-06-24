@@ -20,6 +20,6 @@ public class Requisito {
 
     @ManyToOne
     @JoinColumn (name = "id_tipo")
-    @JsonIgnoreProperties(value = "tipo")
+    @JsonIgnoreProperties(value = "requisitos")
     private Tipo tipo;
 }

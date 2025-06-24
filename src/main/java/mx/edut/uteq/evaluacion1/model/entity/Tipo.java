@@ -2,6 +2,8 @@ package mx.edut.uteq.evaluacion1.model.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ public class Tipo {
     private int id;
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipo")
+    @JsonIgnoreProperties(value = "tipo")
     private List<Requisito> requisitos;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -56,7 +56,7 @@ public class TipoController {
         if(opt.isPresent()){
             Tipo t = opt.get();
             t.setNombre(tipo.getNombre());
-            ResponseEntity.ok(tipoRepo.save(t));
+            return ResponseEntity.ok(tipoRepo.save(t));
         }        
         return ResponseEntity.notFound().build();
     }

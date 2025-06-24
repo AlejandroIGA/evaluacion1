@@ -20,6 +20,6 @@ public class CategoriaRequisito {
     private Categoria categoria;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo", nullable = false)
+    @JoinColumn(name = "id_requisito", nullable = false)
     private Tipo tipo;
 }
