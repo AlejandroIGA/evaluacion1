@@ -25,5 +25,6 @@ private String categoria_estatal;
 
 @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_categoria")
+    
     private List<CategoriaRequisito> categoriasTipo;
 }

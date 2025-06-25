@@ -25,6 +25,6 @@ public class Tipo {
     private List<Requisito> requisitos;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_requisito")
+    @JoinColumn(name = "id_categoria")
     private List<CategoriaRequisito> categorias;
 }
