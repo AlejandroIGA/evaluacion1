@@ -66,7 +66,7 @@ public class RequisitoController {
         Optional<Requisito> opt = requisitoRepo.findById(id);
         if(opt.isPresent()){
             Requisito r = opt.get();
-            Optional<Tipo> tipoOpt = tipoRepo.findById(r.getTipo().getId());
+            Optional<Tipo> tipoOpt = tipoRepo.findById(requisito.getTipo().getId());
             if(tipoOpt.isPresent()){
                 Tipo t = tipoOpt.get();
                 r.setDescripcion(requisito.getDescripcion());

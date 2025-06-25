@@ -1,5 +1,7 @@
 package mx.edut.uteq.evaluacion1.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +19,10 @@ public class CategoriaRequisito {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
+    @JsonBackReference
     private Categoria categoria;
 
     @ManyToOne
-    @JoinColumn(name = "id_requisito", nullable = false)
+    @JoinColumn(name = "id_tipo", nullable = false)
     private Tipo tipo;
 }
